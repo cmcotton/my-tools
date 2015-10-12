@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-By: chtd
+Build-Jdk: 1.8.0_51
+Class-Path: ./jsch-0.1.53.jar
+Main-Class: sftp.CleanPipeXMLGen
+Created-By: Maven Integration for Eclipse
+mode: development
+url: 
+
