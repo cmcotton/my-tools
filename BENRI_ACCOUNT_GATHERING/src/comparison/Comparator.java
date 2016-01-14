@@ -7,15 +7,10 @@ import io.FileIO;
 import io.PropertiesAccessObject;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import excel.ExcelDataReaderXLS;
-import excel.ExcelDataReaderXLSX;
 
 /**
  * 程式資訊摘要：
@@ -68,12 +63,12 @@ public class Comparator {
                     List<String> accountList = io.readFileIntoList(file);
                     
                     // output 新帳號以及已經不存在的帳號
-                    compareAccountAgainstExcel(accountList, serverDir.getName());
+                    //compareAccountAgainstExcel(accountList, serverDir.getName());
                 
 
                     // output 與excel檔上紀錄的群組不同的帳號
                     
-                    compareGroupAgainstExcel(accountList, serverDir.getName());
+                    //compareGroupAgainstExcel(accountList, serverDir.getName());
                     
                 }
             }
@@ -85,6 +80,7 @@ public class Comparator {
 
     }
     
+    /*
     private void compareAccountAgainstExcel(List<String> accountList, String iPAddr) {
         ExcelDataReaderXLS reader = new ExcelDataReaderXLSX();
         File lastSummaryTable = new File("./SOP系統管理資訊表.xlsx");
@@ -151,7 +147,7 @@ public class Comparator {
         logger.info("Write {} at {}", groupChanged.getName(), groupChanged.getPath());
         
     }
-    
+    */
     private boolean isInList(String s, List<String> baseList) {
         boolean isMatched = false;
         

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+    PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+<hibernate-mapping>
+	<class name="entity.ArcEventCorrelation" table="arc_event_correlation">
+<!-- 
+        <id name="id" type="int">
+            <column name="id" sql-type="int" />
+            <generator class="native" />
+        </id>
+         -->
+        <property name="CORRELATED_EVENT_ID" type="long" >
+            <column name="CORRELATED_EVENT_ID"  />
+        </property>
+        
+		<property name="BASE_EVENT_IDS" type="string" not-null="true">
+			<column name="BASE_EVENT_IDS" not-null="true" />
+		</property>
+		<property name="end_time" type="java.util.Date" not-null="true">
+			<column name="end_time" not-null="true" sql-type="DATETIME" />
+		</property>
+		<property name="ESM_HOST" type="string" not-null="true">
+			<column name="ESM_HOST" not-null="true" />
+		</property>		
+	</class>
+
+</hibernate-mapping>

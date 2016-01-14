@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+	<!-- 
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/account</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">cht@123</property>
+		
+		
+		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		 -->
+		 
+		<!-- 物件與資料庫表格映射文件 -->
+ 
+        <mapping resource="arcevent.hbm.xml"/>
+        <mapping resource="arceventcorrelation.hbm.xml"/>
+        
+		<mapping class="entity.ArcEvent" />
+		<mapping class="entity.ArcEventCorrelation" />
+
+	</session-factory>
+</hibernate-configuration>
