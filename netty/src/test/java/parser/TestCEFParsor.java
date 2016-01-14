@@ -11,7 +11,6 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 import db.DBConnection;
 import db.DBConnectionNative;
