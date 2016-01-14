@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+    PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+<hibernate-mapping>
+	<class name="entity.ArcEvent" table="arc_event">
+
+		<id name="id" column="id" type="int">
+			<generator class="native" />
+		</id>
+   
+        <property name="EVENT_ID" type="long" not-null="true">
+            <column name="EVENT_ID" not-null="true" />
+        </property>
+        
+        
+		<property name="ESM_HOST" type="string" not-null="true">
+			<column name="ESM_HOST" not-null="true" />
+		</property>
+
+
+
+		<property name="START_TIME" type="java.util.Date" not-null="true">
+			<column name="START_TIME" not-null="true" sql-type="DATETIME" />
+		</property>
+		<property name="NAME" type="string" not-null="true">
+			<column name="NAME" not-null="true" />
+		</property>
+		<property name="PRIORITY" type="int" not-null="true">
+			<column name="PRIORITY" not-null="true" />
+		</property>
+		<property name="SRC_ADDRESS" type="long" not-null="true">
+			<column name="SRC_ADDRESS" not-null="true" />
+		</property>
+		<property name="SRC_PORT" type="int" not-null="true">
+			<column name="SRC_PORT" not-null="true" />
+		</property>
+		<property name="SOURCE_COUNTRY_NAME" type="string" not-null="true">
+			<column name="SOURCE_COUNTRY_NAME" not-null="true" />
+		</property>
+		<property name="DEST_ADDRESS" type="long" not-null="true">
+			<column name="DEST_ADDRESS" not-null="true" />
+		</property>
+		<property name="DEST_PORT" type="int" not-null="true">
+			<column name="DEST_PORT" not-null="true" />
+		</property>
+		<property name="DESC_COUNTRY_NAME" type="string" not-null="true">
+			<column name="DESC_COUNTRY_NAME" not-null="true" />
+		</property>
+		<property name="DEST_HOST_NAME" type="string" not-null="true">
+			<column name="DEST_HOST_NAME" not-null="true" />
+		</property>
+		<property name="BASE_EVENT_COUNT" type="int" not-null="true">
+			<column name="BASE_EVENT_COUNT" not-null="true" />
+		</property>
+		<property name="MANAGER_RECEIPT_TIME" type="java.util.Date" not-null="true">
+			<column name="MANAGER_RECEIPT_TIME" not-null="true" sql-type="DATETIME" />
+		</property>
+		<property name="DVC_ACTION" type="string" not-null="true">
+			<column name="DVC_ACTION" not-null="true" />
+		</property>
+		<property name="DVC_CUSTOM_STRING1" type="string" not-null="true">
+			<column name="DVC_CUSTOM_STRING1" not-null="true" />
+		</property>
+		<property name="FILE_NAME" type="string" not-null="true">
+			<column name="FILE_NAME" not-null="true" />
+		</property>
+		<property name="DVC_PRODUCT" type="string" not-null="true">
+			<column name="DVC_PRODUCT" not-null="true" />
+		</property>
+		<property name="EVENT_TYPE" type="string" not-null="true">
+			<column name="EVENT_TYPE" not-null="true" />
+		</property>
+		<property name="DVC_CUSTOM_IPV6_ADDRESS1" type="string"
+			not-null="true">
+			<column name="DVC_CUSTOM_IPV6_ADDRESS1" not-null="true" />
+		</property>
+		<property name="DVC_CUSTOM_IPV6_ADDRESS2" type="string"
+			not-null="true">
+			<column name="DVC_CUSTOM_IPV6_ADDRESS2" not-null="true" />
+		</property>
+		<property name="DVC_CUSTOM_IPV6_ADDRESS3" type="string"
+			not-null="true">
+			<column name="DVC_CUSTOM_IPV6_ADDRESS3" not-null="true" />
+		</property>
+		<property name="DVC_CUSTOM_IPV6_ADDRESS4" type="string"
+			not-null="true">
+			<column name="DVC_CUSTOM_IPV6_ADDRESS4" not-null="true" />
+		</property>
+		<property name="DVC_CUSTOM_STRING2" type="string" not-null="true">
+			<column name="DVC_CUSTOM_STRING2" not-null="true" />
+		</property>
+
+		<property name="DVC_CUSTOM_STRING3" type="string" not-null="true">
+			<column name="DVC_CUSTOM_STRING3" not-null="true" />
+		</property>
+
+		<property name="DVC_CUSTOM_STRING4" type="string" not-null="true">
+			<column name="DVC_CUSTOM_STRING4" not-null="true" />
+		</property>
+
+		<property name="DVC_CUSTOM_STRING5" type="string" not-null="true">
+			<column name="DVC_CUSTOM_STRING5" not-null="true" />
+		</property>
+		<property name="DVC_CUSTOM_STRING6" type="string" not-null="true">
+			<column name="DVC_CUSTOM_STRING6" not-null="true" />
+		</property>
+		<property name="SRC_HOST_NAME" type="string" not-null="true">
+			<column name="SRC_HOST_NAME" not-null="true" />
+		</property>
+		<property name="FILE_PATH" type="string" not-null="true">
+			<column name="FILE_PATH" not-null="true" />
+		</property>
+		<property name="DVC_VENDOR" type="string" not-null="true">
+			<column name="DVC_VENDOR" not-null="true" />
+		</property>
+		<property name="SRC_USER_NAME" type="string" not-null="true">
+			<column name="SRC_USER_NAME" not-null="true" />
+		</property>
+		<property name="DEST_USER_NAME" type="string" not-null="true">
+			<column name="DEST_USER_NAME" not-null="true" />
+		</property>
+		<property name="DVC_ADDRESS" type="long" not-null="true">
+			<column name="DVC_ADDRESS" not-null="true" />
+		</property>
+		<property name="DVC_HOST_NAME" type="string" not-null="true">
+			<column name="DVC_HOST_NAME" not-null="true" />
+		</property>
+		<property name="DVC_PROCESS_NAME" type="string" not-null="true">
+			<column name="DVC_PROCESS_NAME" not-null="true" />
+		</property>
+
+		<property name="REQUEST_URL" type="string" not-null="true">
+			<column name="REQUEST_URL" not-null="true" />
+		</property>
+		<property name="EXTERNAL_ID" type="string" not-null="true">
+			<column name="EXTERNAL_ID" not-null="true" />
+		</property>
+		<property name="DVC_OUTBOUND_INTERFACE" type="string"
+			not-null="true">
+			<column name="DVC_OUTBOUND_INTERFACE" not-null="true" />
+		</property>
+		<property name="DVC_EVENT_CLASS_ID" type="string" not-null="true">
+			<column name="DVC_EVENT_CLASS_ID" not-null="true" />
+		</property>
+		<property name="CATEGORY_SIGNIFICANCE" type="string"
+			not-null="true">
+			<column name="CATEGORY_SIGNIFICANCE" not-null="true" />
+		</property>
+		<property name="CATEGORY_BEHAVIOR" type="string" not-null="true">
+			<column name="CATEGORY_BEHAVIOR" not-null="true" />
+		</property>
+		<property name="CATEGORY_DEVICE_GROUP" type="string"
+			not-null="true">
+			<column name="CATEGORY_DEVICE_GROUP" not-null="true" />
+		</property>
+		<property name="CATEGORY_OUTCOME" type="string" not-null="true">
+			<column name="CATEGORY_OUTCOME" not-null="true" />
+		</property>
+		<property name="CATEGORY_OBJECT" type="string" not-null="true">
+			<column name="CATEGORY_OBJECT" not-null="true" />
+		</property>
+
+	</class>
+
+</hibernate-mapping>

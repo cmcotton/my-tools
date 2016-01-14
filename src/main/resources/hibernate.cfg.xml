@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+	
+		<!-- 物件與資料庫表格映射文件 -->
+ 
+        <mapping resource="arcevent.hbm.xml"/>
+        <mapping resource="arceventcorrelation.hbm.xml"/>
+        
+		<mapping class="entity.ArcEvent" />
+		<mapping class="entity.ArcEventCorrelation" />
+
+	</session-factory>
+</hibernate-configuration>
