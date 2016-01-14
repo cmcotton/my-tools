@@ -71,18 +71,6 @@ public class CEFParser {
             throw new MyCEFParsingException();
         }
 
-//        int year = Calendar.getInstance().get(Calendar.YEAR);
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm:ss", Locale.ENGLISH);
-//        try {
-//            Date date = sdf.parse(year + " " + dateTime);
-//            logger.debug(date.toString());
-//        } catch (ParseException e) {
-//            
-//            logger.error("{}", e.toString());
-//            
-//            throw new MyCEFParsingException();
-//        }
-
         Pattern pattern = Pattern.compile("\\s[a-zA-Z0-9_]+=");
         Matcher matcher = pattern.matcher(line);
 
