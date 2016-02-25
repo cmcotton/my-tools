@@ -50,22 +50,12 @@ public class CEFParser {
         logger.debug(line);
 
         // header
-//        String dateTime = null;
-
         try {
-//            String[] headerTokens = tokens[0].split(" ");
-//            json = unserialize("esmHost", headerTokens[3], json);
-
             String[] cefTokens = tokens[0].split("\\|");
             json = unserialize("name", cefTokens[5], json);
             json = unserialize("dvcVendor", cefTokens[1], json);
             json = unserialize("dvcProduct", cefTokens[2], json);
             json = unserialize("dvcEventClassId", cefTokens[4], json);
-
-//            String headerMonth = headerTokens[0];
-//            dateTime = headerMonth.substring(headerMonth.indexOf(">") + 1) + " " + headerTokens[1] + " "
-//                    + headerTokens[2];
-
         } catch (Exception e) {
             logger.error("{}", e.toString());
             throw new MyCEFParsingException();
@@ -186,7 +176,7 @@ public class CEFParser {
         colKeyMapping = new HashMap();
         corrColKeyMapping = new HashMap();
 
-        colKeyMapping.put("esmHost", "ESM_HOST");
+        colKeyMapping.put("ahost", "ESM_HOST");
         colKeyMapping.put("eventId", "EVENT_ID");
         colKeyMapping.put("start", "START_TIME");
         colKeyMapping.put("name", "NAME");
