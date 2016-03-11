@@ -29,29 +29,10 @@ public class CleanPipeXMLGen {
     public CleanPipeXMLGen(String args[]) {
         dirPrefix = "/export/home/CleanPipeForward/";
         ftpID = "ftp_ips";
-        ftpPWD = "xxxxxx";
-        serverName = "1.1.1.1";
+        ftpPWD = "";
+        serverName = "172.17.2.100";
         debugMode = "1";
-        loadConfig();
-        String sb = new String();
-        int i = 0;
-        for (i = 0; i < args.length; i++)
-            sb = (new StringBuilder()).append(sb).append(args[i]).append(" ").toString();
-
-        System.out.println((new StringBuilder()).append("Receive Parameter : ").append(sb.toString()).toString());
-        String str2[] = sb.split("\\|");
-        System.out.println("=======================================================");
-        for (i = 0; i < str2.length; i++) {
-            if (str2[i].startsWith("$")) {
-                str2[i] = "";
-            }
-            System.out.println((new StringBuilder()).append("Parameter ").append(i).append(" : ").append(str2[i])
-                    .append(" : Length = ").append(str2[i].length()).toString());
-        }
-
-        System.out.println("=======================================================");
-        String xmlOriginString = loadXMLTemplate();
-        String xmlFinalString = replaceXMLTemplate(xmlOriginString, str2);
+        loadConfig();        
     }
 
     private void loadConfig() {
@@ -75,6 +56,8 @@ public class CleanPipeXMLGen {
                 System.out.println((new StringBuilder()).append("DebugInfo: ").append(ftpPWD).toString());
                 System.out.println("DebugInfo: **********************************");
             }
+            
+            fileDir = (new StringBuilder()).append(dirPrefix).append("/xml/").toString();
         } catch (Exception e) {
             System.out.println(e.toString());
             System.exit(-1);
@@ -176,12 +159,12 @@ public class CleanPipeXMLGen {
             xmlString = xmlString.replaceFirst("replace_reserved1", parameter[22].trim());
             xmlString = xmlString.replaceFirst("replace_reserved2", parameter[23].trim());
         }
-        String dir = (new StringBuilder()).append(dirPrefix).append("/xml/").toString();
+        
         String fileName = (new StringBuilder()).append(getDateString(System.currentTimeMillis())).append("_")
                 .append(parameter[1].trim()).append(".xml").toString();
-        writeToFile((new StringBuilder()).append(dir).append(fileName).toString(), xmlString);
+        writeToFile((new StringBuilder()).append(fileDir).append(fileName).toString(), xmlString);
 //        ftpToSOC365(dir, fileName);
-        upload(dir, fileName);
+//        upload(dir, fileName);
         return xmlString;
 
     }
@@ -240,7 +223,7 @@ public class CleanPipeXMLGen {
         return xmlString;
     }
 
-    private void upload(String dir, String fileName) {
+    public void upload(String fileName) {
         JSch jsch = new JSch();
         Session session = null;
         try {
@@ -255,7 +238,7 @@ public class CleanPipeXMLGen {
             
             // start uploading
             try {
-                sftpChannel.put(new FileInputStream(dir + fileName), fileName, ChannelSftp.OVERWRITE);
+                sftpChannel.put(new FileInputStream(fileDir + fileName), fileName, ChannelSftp.OVERWRITE);
                 sftpChannel.put((new StringBuilder()).append(dirPrefix).append("/template/finish.ok").toString(), (new StringBuilder()).append(fileName).append(".ok").toString());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -273,13 +256,67 @@ public class CleanPipeXMLGen {
 
     public static void main(String args[]) {
         System.out.println("start");
+        if (args.length < 1) {
+            System.out.println("1: write XML 2: sftp");
+            return;
+        }
+        
         CleanPipeXMLGen class1 = new CleanPipeXMLGen(args);
+        
+        if ("1".equals(args[0])) {
+            String xmlOriginString = class1.loadXMLTemplate();
+            String sb = class1.processSb(args);
+            String[] str2 = class1.processStr2(sb);
+            class1.replaceXMLTemplate(xmlOriginString, str2);
+        } else if ("2".equals(args[0])) {
+            File[] xmlFiles = class1.getFiles();
+            for (File xmlF : xmlFiles) {
+                if (xmlF.isFile()) {
+                    class1.upload(xmlF.getName());
+                }
+            }
+        }
+        
     }
 
+    private String[] processStr2(String sb) {
+        System.out.println((new StringBuilder()).append("Receive Parameter : ").append(sb.toString()).toString());
+        String str2[] = sb.split("\\|");
+        System.out.println("=======================================================");
+        for (int i = 0; i < str2.length; i++) {
+            if (str2[i].startsWith("$")) {
+                str2[i] = "";
+            }
+            System.out.println((new StringBuilder()).append("Parameter ").append(i).append(" : ").append(str2[i])
+                    .append(" : Length = ").append(str2[i].length()).toString());
+        }
+
+        System.out.println("=======================================================");
+        
+        return str2;
+    }
+    
+    private String processSb(String[] args) {
+        String sb = new String();
+        int i = 0;
+        for (i = 0; i < args.length; i++) {
+            sb = (new StringBuilder()).append(sb).append(args[i]).append(" ").toString();
+        }
+        
+        return sb;
+    }
+    
+    private File[] getFiles() {
+        File xmlFileDir = new File(fileDir);        
+        File[] xmlFiles = xmlFileDir.listFiles();
+        return xmlFiles;
+    }
+    
     private String dirPrefix;
     private String ftpID;
     private String ftpPWD;
     private String serverName;
     private String ftpPort;
     private String debugMode;
+    private String fileDir;
 }
