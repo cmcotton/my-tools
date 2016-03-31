@@ -15,7 +15,7 @@ import java.util.Date;
  *@version 1.0
  *@since 1.0
  */
-public class ExceptionLog {
+public class ExceptionLog implements Event {
     
     long id;
     String log;
@@ -68,6 +68,30 @@ public class ExceptionLog {
      */
     public void setRetryTime(int retryTime) {
         this.retryTime = retryTime;
+    }
+    /* (non-Javadoc)
+     * @see entity.Event#setSTART_TIME(java.util.Date)
+     */
+    @Override
+    public void setSTART_TIME(Date date) {
+        // TODO Auto-generated method stub
+        
+    }
+    /* (non-Javadoc)
+     * @see entity.Event#setMANAGER_RECEIPT_TIME(java.util.Date)
+     */
+    @Override
+    public void setMANAGER_RECEIPT_TIME(Date date) {
+        // TODO Auto-generated method stub
+        
+    }
+    /* (non-Javadoc)
+     * @see entity.Event#setEnd_time(java.util.Date)
+     */
+    @Override
+    public void setEnd_time(Date date) {
+        // TODO Auto-generated method stub
+        
     }
     
     

@@ -290,6 +290,181 @@ public class DBConnectionNative extends DBConnection {
             logger.error(e.toString());
         }
     }
+    
+    public List<Event> exportArcEventOldData(int day) {
+        List<Event> results = new ArrayList<>();
+        
+        PreparedStatement stmt = null;
+
+        String sql = "SELECT * FROM arc_event WHERE start_time < DATE_ADD(NOW(),INTERVAL ? DAY)";
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, -day);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                ArcEvent row = new ArcEvent();
+                
+                row.setId(rs.getLong("id"));
+                row.setESM_HOST(rs.getString("ESM_HOST"));
+                row.setEVENT_ID(rs.getLong("EVENT_ID"));
+                row.setSTART_TIME(rs.getDate("START_TIME"));
+                row.setNAME(rs.getString("NAME"));
+                row.setPRIORITY(rs.getInt("PRIORITY"));
+                row.setSRC_ADDRESS(rs.getLong("SRC_ADDRESS"));
+                row.setSRC_PORT(rs.getInt("SRC_PORT"));                
+                row.setSOURCE_COUNTRY_NAME(rs.getString("SOURCE_COUNTRY_NAME"));
+                row.setDEST_ADDRESS(rs.getLong("DEST_ADDRESS"));
+                row.setDEST_PORT(rs.getInt("DEST_PORT"));
+                row.setDESC_COUNTRY_NAME(rs.getString("DESC_COUNTRY_NAME"));
+                row.setDEST_HOST_NAME(rs.getString("DEST_HOST_NAME"));
+                row.setBASE_EVENT_COUNT(rs.getInt("BASE_EVENT_COUNT"));
+                row.setMANAGER_RECEIPT_TIME(rs.getDate("MANAGER_RECEIPT_TIME"));
+                row.setDVC_ACTION(rs.getString("DVC_ACTION"));
+                row.setDVC_CUSTOM_STRING1(rs.getString("DVC_CUSTOM_STRING1"));
+                row.setFILE_NAME(rs.getString("FILE_NAME"));
+                row.setDVC_PRODUCT(rs.getString("DVC_PRODUCT"));
+                row.setEVENT_TYPE(rs.getString("EVENT_TYPE"));
+                row.setDVC_CUSTOM_IPV6_ADDRESS1(rs.getString("DVC_CUSTOM_IPV6_ADDRESS1"));
+                row.setDVC_CUSTOM_IPV6_ADDRESS2(rs.getString("DVC_CUSTOM_IPV6_ADDRESS2"));
+                row.setDVC_CUSTOM_IPV6_ADDRESS3(rs.getString("DVC_CUSTOM_IPV6_ADDRESS3"));
+                row.setDVC_CUSTOM_IPV6_ADDRESS4(rs.getString("DVC_CUSTOM_IPV6_ADDRESS4"));
+                row.setDVC_CUSTOM_STRING2(rs.getString("DVC_CUSTOM_STRING2"));
+                row.setDVC_CUSTOM_STRING3(rs.getString("DVC_CUSTOM_STRING3"));
+                row.setDVC_CUSTOM_STRING4(rs.getString("DVC_CUSTOM_STRING4"));
+                row.setDVC_CUSTOM_STRING5(rs.getString("DVC_CUSTOM_STRING5"));
+                row.setDVC_CUSTOM_STRING6(rs.getString("DVC_CUSTOM_STRING6"));
+                row.setSRC_HOST_NAME(rs.getString("SRC_HOST_NAME"));
+                row.setFILE_PATH(rs.getString("FILE_PATH"));
+                row.setDVC_VENDOR(rs.getString("DVC_VENDOR"));
+                row.setSRC_USER_NAME(rs.getString("SRC_USER_NAME"));
+                row.setDEST_USER_NAME(rs.getString("DEST_USER_NAME"));
+                row.setDVC_ADDRESS(rs.getLong("DVC_ADDRESS"));
+                row.setDVC_HOST_NAME(rs.getString("DVC_HOST_NAME"));
+                row.setDVC_PROCESS_NAME(rs.getString("DVC_PROCESS_NAME"));
+                row.setREQUEST_URL(rs.getString("REQUEST_URL"));
+                row.setEXTERNAL_ID(rs.getString("EXTERNAL_ID"));
+                row.setDVC_OUTBOUND_INTERFACE(rs.getString("DVC_OUTBOUND_INTERFACE"));
+                row.setDVC_EVENT_CLASS_ID(rs.getString("DVC_EVENT_CLASS_ID"));
+                row.setCATEGORY_SIGNIFICANCE(rs.getString("CATEGORY_SIGNIFICANCE"));
+                row.setCATEGORY_BEHAVIOR(rs.getString("CATEGORY_BEHAVIOR"));
+                row.setCATEGORY_DEVICE_GROUP(rs.getString("CATEGORY_DEVICE_GROUP"));
+                row.setCATEGORY_OUTCOME(rs.getString("CATEGORY_OUTCOME"));
+                row.setCATEGORY_OBJECT(rs.getString("CATEGORY_OBJECT"));
+                
+                results.add(row);
+            }
+                        
+        } catch (Exception e) {
+            logger.error(e.toString());
+        }
+        
+        return results;
+    }
+    
+    public List<Event> exportArcEventCorrelationOldData(int day) {
+        List<Event> results = new ArrayList<>();
+        
+        PreparedStatement stmt = null;
+
+        String sql = "SELECT * FROM arc_event_correlation WHERE end_time < DATE_ADD(NOW(),INTERVAL ? DAY)";
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, -day);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                ArcEventCorrelation row = new ArcEventCorrelation();
+                
+                row.setId(rs.getLong("id"));
+                row.setBASE_EVENT_IDS(rs.getString("BASE_EVENT_IDS"));
+                row.setCORRELATED_EVENT_ID(rs.getLong("CORRELATED_EVENT_ID"));
+                row.setEnd_time(rs.getDate("end_time"));
+                row.setESM_HOST(rs.getString("ESM_HOST"));                
+                
+                results.add(row);
+            }
+                        
+        } catch (Exception e) {
+            logger.error(e.toString());
+        }
+        
+        return results;
+    }
+    
+    public List<Event> exportExceptionLogOldData(int day) {
+        List<Event> results = new ArrayList<>();
+        
+        PreparedStatement stmt = null;
+
+        String sql = "SELECT * FROM exception_log WHERE exception_time < DATE_ADD(NOW(),INTERVAL ? DAY)";
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, -day);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                ExceptionLog row = new ExceptionLog();
+                
+                row.setId(rs.getLong("id"));
+                row.setLog(rs.getString("log"));
+                row.setExceptionTime(rs.getDate("exception_time"));
+                row.setRetryTime(rs.getInt("retry_time"));                
+                
+                results.add(row);
+            }
+                        
+        } catch (Exception e) {
+            logger.error(e.toString());
+        }
+        
+        return results;
+    }
+    
+    public void deleteOldData(int day) {
+        PreparedStatement stmt = null;
+
+        String sql = "DELETE FROM arc_event WHERE start_time < DATE_ADD(NOW(),INTERVAL ? DAY)";        
+        
+        try {
+            int idx = 1;
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(idx++, -day);            
+            stmt.execute();
+                        
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.toString());
+        }
+        
+        sql = "DELETE FROM arc_event_correlation WHERE end_time < DATE_ADD(NOW(),INTERVAL ? DAY)";
+        try {
+            int idx = 1;
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(idx++, -day);            
+            stmt.execute();
+                        
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.toString());
+        }
+        
+        sql ="DELETE FROM exception_log WHERE exception_time < DATE_ADD(NOW(),INTERVAL ? DAY)";
+        try {
+            int idx = 1;
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(idx++, -day);            
+            stmt.execute();
+                        
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.toString());
+        }
+        
+    }
 
     public static void main(String[] args) throws HibernateException {
 
