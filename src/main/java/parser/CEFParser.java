@@ -231,6 +231,8 @@ public class CEFParser {
         corrColKeyMapping.put("baseEventIds", "BASE_EVENT_IDS");
         corrColKeyMapping.put("eventId", "CORRELATED_EVENT_ID");
         corrColKeyMapping.put("end", "end_time");
+        
+        corrColKeyMapping.put("cat", "DEVICE_EVENT_CATEGORY");
     }
 
     long ipToLong(String ipAddress) {

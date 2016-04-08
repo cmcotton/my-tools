@@ -35,6 +35,8 @@ public class ExportManager {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
     
+    private String DUMP_PATH = "/opt/cefParser/";
+    
     /**
      * query data before n days from DB, transform to Json and export a txt named table.yyyyMMdd.txt    
      * @param day
@@ -74,7 +76,7 @@ public class ExportManager {
     
     private void writeFile(String tableName, List<Event> contents) {
         
-        Path dest = Paths.get(tableName + "_" + sdf.format(new Date()) + ".txt");
+        Path dest = Paths.get(DUMP_PATH + tableName + "_" + sdf.format(new Date()) + ".txt");
         try {
             Files.createFile(dest);
         } catch (IOException e) {
