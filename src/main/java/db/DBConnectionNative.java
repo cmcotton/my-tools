@@ -101,10 +101,10 @@ public class DBConnectionNative extends DBConnection {
                     + "FILE_PATH, DVC_VENDOR, SRC_USER_NAME, DEST_USER_NAME, DVC_ADDRESS,"// 5
                     + "DVC_HOST_NAME, DVC_PROCESS_NAME, REQUEST_URL, EXTERNAL_ID,"// 4
                     + "DVC_OUTBOUND_INTERFACE, DVC_EVENT_CLASS_ID, CATEGORY_SIGNIFICANCE, CATEGORY_BEHAVIOR,"// 4
-                    + "CATEGORY_DEVICE_GROUP, CATEGORY_OUTCOME, CATEGORY_OBJECT) "
+                    + "CATEGORY_DEVICE_GROUP, CATEGORY_OUTCOME, CATEGORY_OBJECT, DEVICE_EVENT_CATEGORY) "
                     + // 3
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
-                    + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + "?, ?, ?, ?, ?) ";
+                    + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + "?, ?, ?, ?, ?, ?) ";
 
             try {
                 stmt = con.prepareStatement(sql);
@@ -159,6 +159,7 @@ public class DBConnectionNative extends DBConnection {
                 stmt.setString(index++, ((ArcEvent) evt).getCATEGORY_DEVICE_GROUP());
                 stmt.setString(index++, ((ArcEvent) evt).getCATEGORY_OUTCOME());
                 stmt.setString(index++, ((ArcEvent) evt).getCATEGORY_OBJECT());
+                stmt.setString(index++, ((ArcEvent) evt).getDEVICE_EVENT_CATEGORY());
             } catch (SQLException e) {
                 logger.error(e.toString());
             }

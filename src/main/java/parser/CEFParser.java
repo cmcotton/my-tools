@@ -226,13 +226,12 @@ public class CEFParser {
         colKeyMapping.put("dvcVendor", "DVC_VENDOR");
         colKeyMapping.put("dvcProduct", "DVC_PRODUCT");
         colKeyMapping.put("dvcEventClassId", "DVC_EVENT_CLASS_ID");
-
+        colKeyMapping.put("cat", "DEVICE_EVENT_CATEGORY");
+        
         // -----------------------------------------------------------------
         corrColKeyMapping.put("baseEventIds", "BASE_EVENT_IDS");
         corrColKeyMapping.put("eventId", "CORRELATED_EVENT_ID");
-        corrColKeyMapping.put("end", "end_time");
-        
-        corrColKeyMapping.put("cat", "DEVICE_EVENT_CATEGORY");
+        corrColKeyMapping.put("end", "end_time");        
     }
 
     long ipToLong(String ipAddress) {
