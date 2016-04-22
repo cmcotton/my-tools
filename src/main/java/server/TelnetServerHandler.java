@@ -106,7 +106,7 @@ public class TelnetServerHandler extends SimpleChannelInboundHandler<String> {
             db.save(e);
         }
 //        db.close();
-        log.info("---------------------------------------------------------");
+        log.debug("---------------------------------------------------------");
         
 //        messageReceived(ctx, msg);
     }

@@ -79,7 +79,7 @@ public class DBConnectionNative extends DBConnection {
 
     }
 
-    public void save(Event evt) throws FileNotFoundException, IOException {
+    public void save(Event evt) {
         PreparedStatement stmt = null;
 
         String sql;
@@ -160,7 +160,7 @@ public class DBConnectionNative extends DBConnection {
                 stmt.setString(index++, ((ArcEvent) evt).getCATEGORY_OUTCOME());
                 stmt.setString(index++, ((ArcEvent) evt).getCATEGORY_OBJECT());
                 stmt.setString(index++, ((ArcEvent) evt).getDEVICE_EVENT_CATEGORY());
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 logger.error(e.toString());
             }
         } else if (evt instanceof ArcEventCorrelation) {
@@ -180,17 +180,15 @@ public class DBConnectionNative extends DBConnection {
                 stmt.setLong(index++, ((ArcEventCorrelation) evt).getCORRELATED_EVENT_ID());
                 stmt.setTimestamp(index++, new java.sql.Timestamp(endTime.getTime()));
                 
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 logger.error(e.toString());
             }
         }
 
         try {
             stmt.execute();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.error(e.toString());
-        } finally {
-
         }
     }
     

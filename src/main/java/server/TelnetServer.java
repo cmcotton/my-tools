@@ -7,6 +7,9 @@ import java.security.cert.CertificateException;
 
 import javax.net.ssl.SSLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -24,6 +27,8 @@ public final class TelnetServer {
 
     static final boolean SSL = System.getProperty("ssl") != null;
     static final int PORT = Integer.parseInt(System.getProperty("port", SSL? "8992" : "8023"));
+    
+    final private Logger logger = LoggerFactory.getLogger(getClass());
 
     public void run() throws CertificateException, SSLException, InterruptedException {
         // Configure SSL.
@@ -45,6 +50,9 @@ public final class TelnetServer {
              .childHandler(new TelnetServerInitializer(null));
 
             b.bind(PORT).sync().channel().closeFuture().sync();
+        } catch(Exception e) {
+            logger.error(e.toString());
+            e.printStackTrace();
         } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
