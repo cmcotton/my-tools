@@ -2,7 +2,6 @@
  * 版權宣告: FDC all rights reserved.
  */
 package parser;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,13 +16,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
-import com.mysql.cj.core.util.StringUtils;
 
 import db.DBConnection;
 import db.DBConnectionNative;
@@ -117,17 +116,17 @@ public class CEFParser {
         }
 
         // ArcEvent 補start and mrt
-        if (!StringUtils.isEmptyOrWhitespaceOnly(startVal)) {
+        if (StringUtils.isNotBlank(startVal)) {
             Date temp = new Date(Long.parseLong(startVal));
             log.setSTART_TIME(temp);
         }
 
-        if (!StringUtils.isEmptyOrWhitespaceOnly(mrtVal)) {
+        if (StringUtils.isNotBlank(mrtVal)) {
             log.setMANAGER_RECEIPT_TIME(new Date(Long.parseLong(mrtVal)));
         }
 
         // ArcEventCorrelation add end_time
-        if (logCorr != null && !StringUtils.isEmptyOrWhitespaceOnly(endVal)) {
+        if (logCorr != null && !StringUtils.isNotBlank(endVal)) {
             logCorr.setEnd_time(new Date(Long.parseLong(endVal)));
         }
 
