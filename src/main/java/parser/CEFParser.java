@@ -95,7 +95,16 @@ public class CEFParser {
         JSONObject jsonCorr = json;
 
         Gson gson = new Gson();
-        ArcEvent log = gson.fromJson(json.toString(), ArcEvent.class);
+        
+        ArcEvent log = null;
+        try {
+            log = gson.fromJson(json.toString(), ArcEvent.class);
+        } catch (Exception e) {
+            logger.error(e.toString());
+            logger.error(json.toString());
+            throw new MyCEFParsingException();
+        }        
+        
         ArcEventCorrelation logCorr = null;
         try {
             if (json.has("BASE_EVENT_IDS")) {
