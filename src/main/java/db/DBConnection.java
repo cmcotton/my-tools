@@ -67,7 +67,7 @@ public class DBConnection {
         }
     }
 
-    public void save(Event evt) throws FileNotFoundException, IOException {
+    public void save(Event evt) {
         
         Transaction tx = null;
         try {            

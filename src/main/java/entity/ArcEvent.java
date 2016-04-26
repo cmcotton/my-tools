@@ -77,6 +77,7 @@ public class ArcEvent implements Event {
     private String CATEGORY_DEVICE_GROUP = "";
     private String CATEGORY_OUTCOME = "";
     private String CATEGORY_OBJECT = "";
+    private String DEVICE_EVENT_CATEGORY = "";
 
     /**
      * @return the eSM_HOST
@@ -636,6 +637,18 @@ public class ArcEvent implements Event {
      */
     public void setId(long id) {
         this.id = id;
+    }
+    /**
+     * @return the dEVICE_EVENT_CATEGORY
+     */
+    public String getDEVICE_EVENT_CATEGORY() {
+        return DEVICE_EVENT_CATEGORY;
+    }
+    /**
+     * @param dEVICE_EVENT_CATEGORY the dEVICE_EVENT_CATEGORY to set
+     */
+    public void setDEVICE_EVENT_CATEGORY(String dEVICE_EVENT_CATEGORY) {
+        DEVICE_EVENT_CATEGORY = dEVICE_EVENT_CATEGORY;
     }
 
     
