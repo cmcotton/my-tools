@@ -46,7 +46,7 @@ public class CEFParser {
         JSONObject json = new JSONObject();
 
         String[] tokens = line.split("\\s[a-zA-Z0-9_]+=");
-        logger.debug(line);
+        logger.info(line);
 
         // header
         try {
