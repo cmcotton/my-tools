@@ -2,7 +2,6 @@
  * 版權宣告: FDC all rights reserved.
  */
 package parser;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,13 +16,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
-import com.mysql.jdbc.StringUtils;
 
 import db.DBConnection;
 import db.DBConnectionNative;
@@ -47,7 +46,7 @@ public class CEFParser {
         JSONObject json = new JSONObject();
 
         String[] tokens = line.split("\\s[a-zA-Z0-9_]+=");
-        logger.debug(line);
+        logger.info(line);
 
         // header
         try {
@@ -95,7 +94,16 @@ public class CEFParser {
         JSONObject jsonCorr = json;
 
         Gson gson = new Gson();
-        ArcEvent log = gson.fromJson(json.toString(), ArcEvent.class);
+        
+        ArcEvent log = null;
+        try {
+            log = gson.fromJson(json.toString(), ArcEvent.class);
+        } catch (Exception e) {
+            logger.error(e.toString());
+            logger.error(json.toString());
+            throw new MyCEFParsingException();
+        }        
+        
         ArcEventCorrelation logCorr = null;
         try {
             if (json.has("BASE_EVENT_IDS")) {
@@ -108,17 +116,17 @@ public class CEFParser {
         }
 
         // ArcEvent 補start and mrt
-        if (!StringUtils.isEmptyOrWhitespaceOnly(startVal)) {
+        if (StringUtils.isNotBlank(startVal)) {
             Date temp = new Date(Long.parseLong(startVal));
             log.setSTART_TIME(temp);
         }
 
-        if (!StringUtils.isEmptyOrWhitespaceOnly(mrtVal)) {
+        if (StringUtils.isNotBlank(mrtVal)) {
             log.setMANAGER_RECEIPT_TIME(new Date(Long.parseLong(mrtVal)));
         }
 
         // ArcEventCorrelation add end_time
-        if (logCorr != null && !StringUtils.isEmptyOrWhitespaceOnly(endVal)) {
+        if (logCorr != null && !StringUtils.isNotBlank(endVal)) {
             logCorr.setEnd_time(new Date(Long.parseLong(endVal)));
         }
 

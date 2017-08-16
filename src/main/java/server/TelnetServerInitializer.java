@@ -21,6 +21,7 @@ public class TelnetServerInitializer extends ChannelInitializer<SocketChannel> {
     private static final StringEncoder ENCODER = new StringEncoder();
 
     private static final TelnetServerHandler SERVER_HANDLER = new TelnetServerHandler();
+//    private static final ServerHandler SERVER_HANDLER = new ServerHandler();
 
     private final SslContext sslCtx;
 

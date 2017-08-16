@@ -8,6 +8,7 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.util.ReferenceCountUtil;
 
 import java.net.InetAddress;
 import java.util.Date;
@@ -87,18 +88,16 @@ public class TelnetServerHandler extends SimpleChannelInboundHandler<String> {
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
-        log.info("---------------------------------{}", counter++);
-  
+        log.info("--{} {}", counter++, this.toString());
+        
         List<Event> evts = null; 
         
         try {
-            
             evts = parser.parse(msg);
-            
         } catch(MyCEFParsingException e) {
-            
             parser.handleParsingError(msg);
-            
+        } finally {
+            ReferenceCountUtil.release(msg);
         }
              
         db.connect();
